@@ -8,7 +8,7 @@ on:
 env:
   REGISTRY: docker.io
   IMAGE_NAME: aemr3/proton-bridge
-  PLATFORMS: linux/amd64,linux/arm64,linux/arm64/v8,linux/arm/v7
+  PLATFORMS: linux/amd64,linux/arm64
 jobs:
   build:
     runs-on: ubuntu-latest
