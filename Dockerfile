@@ -1,11 +1,12 @@
-FROM golang:1.21 AS build
+FROM golang:1.26-bookworm AS build
 
-ARG VERSION=3.12.0
+ARG VERSION=3.26.0
 
 WORKDIR /build
 
 RUN apt-get update && \
-  apt-get install -y --no-install-recommends git build-essential libsecret-1-dev && \
+  apt-get install -y --no-install-recommends git build-essential libsecret-1-dev \
+    libfido2-dev libcbor-dev libssl-dev && \
   git clone https://github.com/ProtonMail/proton-bridge.git && \
   cd proton-bridge && \
   git checkout v$VERSION && \
@@ -16,7 +17,7 @@ FROM debian:12
 
 RUN \
   apt-get update && \
-  apt-get install -y --no-install-recommends pass libsecret-1-0 ca-certificates && \
+  apt-get install -y --no-install-recommends pass libsecret-1-0 libfido2-1 ca-certificates && \
   rm -rf /var/lib/apt/lists/* && \
   addgroup --system --gid 1001 proton && \
   adduser --home /home/proton --system --uid 1001 --gid 1001 proton && \
