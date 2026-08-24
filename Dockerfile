@@ -13,7 +13,7 @@ RUN apt-get update && \
   sed -i 's/Host = "127.0.0.1"/Host = "0.0.0.0"/' internal/constants/constants.go && \
   make build-nogui
 
-FROM debian:12
+FROM debian:13
 
 RUN \
   apt-get update && \
